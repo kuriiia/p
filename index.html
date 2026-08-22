@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maina James Kuria — Portfolio</title>
+  <meta name="description" content="Computer Science coursework portfolio — 10 units, 51 artifacts, from bare-metal hardware to neural networks.">
+  <meta name="theme-color" content="#101116">
+
+  <!-- Favicon: inline SVG "MJK" mark, no extra image request -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232C3B9E'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='24' fill='%23DEE1FF' text-anchor='middle'%3EMJK%3C/text%3E%3C/svg%3E">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Maina James Kuria — CS Portfolio">
+  <meta property="og:description" content="A coursework portfolio spanning ten units — from bare-metal hardware to neural networks — built one lab, one artifact, one commit at a time.">
+  <meta property="og:image" content="images/gd_logo.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Maina James Kuria — CS Portfolio">
+  <meta name="twitter:description" content="A coursework portfolio spanning ten units — from bare-metal hardware to neural networks.">
+  <meta name="twitter:image" content="images/gd_logo.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Mobile top app bar -->
+  <header class="topbar">
+    <button class="topbar-menu" id="menuToggle" aria-label="Open section list" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="topbar-title">MJK</span>
+    <span class="topbar-chip" id="topbarUnit">Intro</span>
+  </header>
+
+  <!-- Navigation rail (desktop) / drawer (mobile) -->
+  <nav class="nav-rail" id="navRail" aria-label="Section navigation">
+    <div class="nav-rail-brand">
+      <span class="brand-mark">MJK</span>
+    </div>
+    <div class="nav-rail-list" id="navList"></div>
+    <a class="nav-rail-fab" href="#hero" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+    </a>
+  </nav>
+  <div class="scrim" id="scrim"></div>
+
+  <header class="hero" id="hero">
+    <div class="hero-blobs" aria-hidden="true">
+      <svg class="blob blob-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45.5,-58.5C58.4,-49.6,68,-34.5,71.9,-17.9C75.8,-1.3,74,17.8,65.2,32.5C56.4,47.2,40.7,57.5,23.6,64.1C6.5,70.7,-12,73.6,-28.6,68.7C-45.2,63.8,-59.9,51.1,-67.8,35C-75.7,18.9,-76.8,-0.6,-71.1,-17.4C-65.4,-34.2,-52.9,-48.3,-38.2,-57C-23.5,-65.7,-11.8,-69,3.6,-73.6C19,-78.2,38,-67.4,45.5,-58.5Z" transform="translate(100 100)"/></svg>
+      <svg class="blob blob-2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M39.9,-51.6C52.5,-42.5,63.6,-30.2,68.1,-15.4C72.6,-0.6,70.5,16.7,62.1,30.5C53.7,44.3,39,54.6,22.9,60.8C6.8,67,-10.7,69.1,-26.5,64.3C-42.3,59.5,-56.4,47.8,-64.1,32.7C-71.8,17.6,-73.1,-1,-68.1,-17.3C-63.1,-33.6,-51.8,-47.6,-38,-56.4C-24.2,-65.2,-12.1,-68.8,1.3,-70.6C14.7,-72.4,27.3,-60.7,39.9,-51.6Z" transform="translate(100 100)"/></svg>
+    </div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Computer Science &middot; LV6A</p>
+      <h1 class="hero-title">Maina James<br>Kuria</h1>
+      <p class="hero-sub">A coursework portfolio spanning ten units — from bare-metal hardware to neural networks — built one lab, one artifact, one commit at a time.</p>
+      <div class="hero-stats">
+        <div class="stat-pill"><span class="stat-num">10</span><span class="stat-label">units</span></div>
+        <div class="stat-pill"><span class="stat-num">51</span><span class="stat-label">artifacts</span></div>
+        <div class="stat-pill stat-pill--tonal"><span class="stat-num">∞</span><span class="stat-label">curiosity</span></div>
+      </div>
+      <div class="hero-card" role="note" aria-label="Student record">
+        <div class="hero-card-row">
+          <span class="hero-card-label">Admission no.</span>
+          <span class="hero-card-value">47359</span>
+        </div>
+        <div class="hero-card-divider"></div>
+        <div class="hero-card-row">
+          <span class="hero-card-label">Exam code</span>
+          <span class="hero-card-value">0470089P/CS/6/2024/071</span>
+        </div>
+      </div>
+    </div>
+    <a class="scroll-hint" href="#coa" aria-label="Scroll to first unit">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+    </a>
+  </header>
+
+  <main id="main">
+
+    <!-- Computer Organization and Architecture -->
+    <section class="unit-section" id="coa" data-unit="Computer Organization &amp; Architecture" data-short="Hardware">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>Computer Organization &amp; Architecture</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-3">
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/coa_hands_on.webp" alt="Hardware practical" loading="lazy"></div>
+          <p class="card-note">Hands-on hardware practical &mdash; opening a desktop tower and working on its internal power and drive connections.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/coa_toolbox.webp" alt="Hardware toolkit" loading="lazy"></div>
+          <p class="card-note">A complete hardware and networking toolkit &mdash; LAN cable tester, crimping and punch-down tools, soldering iron and screwdrivers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operating System -->
+    <section class="unit-section" id="os" data-unit="Operating Systems" data-short="OS">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Operating Systems</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-2">
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/os_disk_mgmt.webp" alt="Disk management" loading="lazy"></div>
+          <p class="card-note">Managing disks and NTFS partitions in Windows 11 Disk Management, including a removable Kingston USB drive.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/os_task_mgr.webp" alt="Task manager performance" loading="lazy"></div>
+          <p class="card-note">Monitoring CPU, memory, disk, network and GPU performance in Windows 11 Task Manager on a high-end i9 / RTX 3080 Ti machine.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fundamentals in Programming -->
+    <section class="unit-section" id="prog" data-unit="Fundamentals in Programming" data-short="Programming">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Fundamentals in Programming</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-mixed">
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/prog_classes.webp" alt="Classes and Objects" loading="lazy"></div>
+          <p class="card-note">Modelling a ShoppingCart class in Java with add-item, discount and receipt methods.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/prog_control.webp" alt="Control Structures" loading="lazy"></div>
+          <p class="card-note">Building a logic-gate truth-table simulator in Java, computing AND, OR and XOR for every input pair.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/prog_data_ops.webp" alt="Data Operations" loading="lazy"></div>
+          <p class="card-note">Implementing an ASCII cryptography module in Java &mdash; a Caesar cipher and a bitwise XOR encryption demo.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/prog_data_types.webp" alt="Data Types" loading="lazy"></div>
+          <p class="card-note">Building a compound-interest calculator in Java with double and int types, flagging highly profitable investments.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/prog_inheritance.webp" alt="Inheritance" loading="lazy"></div>
+          <p class="card-note">Modelling a fleet-management system in Java with an abstract Vehicle class and an ElectricCar subclass that calculates range.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/prog_methods.webp" alt="Methods" loading="lazy"></div>
+          <p class="card-note">Writing Euclidean GCD and LCM methods in Java and testing them on co-prime numbers.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/prog_variables.webp" alt="Variables and Constants" loading="lazy"></div>
+          <p class="card-note">Using final universal constants in a Java astrophysics simulator to compute Earth's escape velocity.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artificial Intelligence -->
+    <section class="unit-section" id="ai" data-unit="Artificial Intelligence" data-short="AI">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2>Artificial Intelligence</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-mixed">
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/ai_control.webp" alt="AI Control Structures" loading="lazy"></div>
+          <p class="card-note">Simulating an early-stopping mechanism for neural-network training in Python with a patience counter.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/ai_data_types.webp" alt="AI Data Types" loading="lazy"></div>
+          <p class="card-note">Building an AI knowledge graph in Python with nested dictionaries of entities and relations, then traversing the edges.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/ai_functions.webp" alt="AI Functions" loading="lazy"></div>
+          <p class="card-note">Writing AI evaluation-metric functions in Python &mdash; Mean Squared Error loss and a ReLU activation.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/ai_knn.webp" alt="KNN classifier" loading="lazy"></div>
+          <p class="card-note">Classifying iris flower species with a K-Nearest Neighbors classifier built from scratch in Python.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/ai_naive_bayes.webp" alt="Naive Bayes" loading="lazy"></div>
+          <p class="card-note">Implementing a Naive Bayes sentiment-analysis classifier from scratch in Python with Laplace smoothing.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/ai_oop.webp" alt="AI OOP" loading="lazy"></div>
+          <p class="card-note">Modelling a genetic-algorithm chromosome as a Python class with fitness scoring and mutation.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/ai_scientific.webp" alt="Scientific Modules" loading="lazy"></div>
+          <p class="card-note">Building an AI data-standardization pipeline in Python &mdash; mean, standard deviation and Z-score normalization from scratch.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Algorithms and Data Structures -->
+    <section class="unit-section" id="ads" data-unit="Algorithms &amp; Data Structures" data-short="Algorithms">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2>Algorithms &amp; Data Structures</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-mixed">
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/ads_array.webp" alt="Array Operations" loading="lazy"></div>
+          <p class="card-note">Transposing a 3x4 matrix into a 4x3 matrix in C# with nested loops.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/ads_binary_tree.webp" alt="Binary Tree Search" loading="lazy"></div>
+          <p class="card-note">Traversing a binary tree in C# with pre-order, in-order and post-order depth-first traversals.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/ads_linked_list.webp" alt="Linked Lists" loading="lazy"></div>
+          <p class="card-note">Finding the middle node of a linked list in C# with the Tortoise-and-Hare fast/slow pointer technique.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/ads_recursion.webp" alt="Recursion" loading="lazy"></div>
+          <p class="card-note">Solving the Tower of Hanoi recursively in C#, printing each optimal disk move.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/ads_search_sort.webp" alt="Searching and Sorting" loading="lazy"></div>
+          <p class="card-note">Implementing a logarithmic-time binary search in C# over a sorted data stream.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/ads_shortest_path.webp" alt="Shortest Path" loading="lazy"></div>
+          <p class="card-note">Finding the shortest path in an unweighted graph in C# using breadth-first search with a parent map.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/ads_stacks_queues.webp" alt="Stacks and Queues" loading="lazy"></div>
+          <p class="card-note">Reversing a string in C# by pushing characters onto a Stack and popping them off (LIFO).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Database Management -->
+    <section class="unit-section" id="db" data-unit="Database Management" data-short="Databases">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2>Database Management</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-mixed">
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/db_create_table.webp" alt="Create Table" loading="lazy"></div>
+          <p class="card-note">Building a university schema in SQL Server &mdash; Students, Courses and Enrollments tables with identity and foreign keys, then inserting records.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/db_alter_table.webp" alt="Alter Table" loading="lazy"></div>
+          <p class="card-note">Altering a Users table to add last-login and active-status columns, then updating specific rows.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/db_dml.webp" alt="Data Manipulation" loading="lazy"></div>
+          <p class="card-note">Running INSERT, UPDATE and DELETE on an inventory table &mdash; discounting high-stock items and purging out-of-stock ones.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/db_drop_table.webp" alt="Drop Table" loading="lazy"></div>
+          <p class="card-note">Dropping a temporary system-backup-logs table in SQL Server after a log rotation.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/db_joins.webp" alt="Joins" loading="lazy"></div>
+          <p class="card-note">Joining Appointments, Patients, Doctors and Specializations with multi-table INNER JOINs to list upcoming medical appointments.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/db_constraints.webp" alt="Table Constraints" loading="lazy"></div>
+          <p class="card-note">Enforcing integrity constraints on a library Books table &mdash; a UNIQUE ISBN and CHECK on publication year and available copies.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/db_views_triggers.webp" alt="Views and Triggers" loading="lazy"></div>
+          <p class="card-note">Creating an ActiveProUsers view and an AFTER DELETE trigger that archives deleted subscriptions to an audit table.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Information Systems -->
+    <section class="unit-section" id="is" data-unit="Information Systems" data-short="Info Systems">
+      <div class="section-header">
+        <span class="section-number">07</span>
+        <h2>Information Systems</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-2">
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/is_vs_install.webp" alt="Visual Studio install" loading="lazy"></div>
+          <p class="card-note">Installing Visual Studio 2022 with the .NET desktop development workload (C# and Visual Basic) to build the information system.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/is_form.webp" alt="Form design" loading="lazy"></div>
+          <p class="card-note">Designing a Customer Order Entry form in Microsoft Access with combo boxes, a total field and Submit / Clear / Exit actions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Networking and Distributed Systems -->
+    <section class="unit-section" id="net" data-unit="Networking &amp; Distributed Systems" data-short="Networking">
+      <div class="section-header">
+        <span class="section-number">08</span>
+        <h2>Networking &amp; Distributed Systems</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-3">
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/net_ipconfig.webp" alt="IP configuration" loading="lazy"></div>
+          <p class="card-note">Reading the full adapter configuration with ipconfig /all &mdash; IPv4 address, subnet mask, default gateway and DNS servers.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/net_packet_tracer.webp" alt="Packet Tracer network" loading="lazy"></div>
+          <p class="card-note">Designing a multi-site network (Main Office, HQ branches and a Branch Office) with routers, VLAN switches, an access point and servers in a network simulator.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/net_troubleshoot.webp" alt="Network troubleshooting" loading="lazy"></div>
+          <p class="card-note">Troubleshooting connectivity with a continuous ping to 8.8.8.8, confirming stable replies and latency.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Web Design -->
+    <section class="unit-section" id="web" data-unit="Web Design" data-short="Web Design">
+      <div class="section-header">
+        <span class="section-number">09</span>
+        <h2>Web Design</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-mixed">
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/web_basic_elements.webp" alt="Basic HTML elements" loading="lazy"></div>
+          <p class="card-note">Building a semantic recipe page &mdash; 'Classic Italian Tiramisu' &mdash; with header, article, figure, an ingredient list and tags.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/wafula_hospital.webp" alt="Hospital website homepage" loading="lazy"></div>
+          <p class="card-note">Building a responsive hospital homepage with Bootstrap &mdash; a hero banner, service cards and a full navigation bar with dropdowns.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/web_dom_access.webp" alt="DOM Access live clock" loading="lazy"></div>
+          <p class="card-note">Accessing and updating the DOM in JavaScript &mdash; a live-updating clock and a "Generate New Quote" button wired to <code>getElementById</code>.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/web_internal_styles.webp" alt="Internal Styles" loading="lazy"></div>
+          <p class="card-note">Creating pure-CSS hover tooltips with internal styles and the :hover pseudo-class &mdash; no JavaScript.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/web_jquery_dom.webp" alt="jQuery DOM" loading="lazy"></div>
+          <p class="card-note">Building a tabbed settings interface (Profile, Security, Billing) driven by DOM updates.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/web_js_arrays.webp" alt="JS Arrays" loading="lazy"></div>
+          <p class="card-note">Building a movie database filter that shows items by genre using JavaScript arrays.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/web_js_functions.webp" alt="JS Functions" loading="lazy"></div>
+          <p class="card-note">Creating a secure login form with a show/hide password toggle using JavaScript functions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Graphic Design -->
+    <section class="unit-section" id="gd" data-unit="Graphic Design" data-short="Graphic Design">
+      <div class="section-header">
+        <span class="section-number">10</span>
+        <h2>Graphic Design</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="bento-grid bento-mixed">
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/gd_illustrator.webp" alt="Adobe Illustrator" loading="lazy"></div>
+          <p class="card-note">Launching Adobe Illustrator 2024 and loading the workspace.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/gd_shapes.webp" alt="Shape tools in Illustrator" loading="lazy"></div>
+          <p class="card-note">Practicing Illustrator's shape tools &mdash; ellipse, rectangle, polygon and star &mdash; with fills, strokes and layered overlaps.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card reveal">
+          <div class="card-img"><img src="images/world_forest_day.webp" alt="World Forestry Day poster" loading="lazy"></div>
+          <p class="card-note">Designing a "World Forestry Day" poster in Canva, layering tree silhouettes over a landscape photo with bold display type.</p>
+        </div>
+        <div tabindex="0" role="button" class="bento-card span-2 reveal">
+          <div class="card-img"><img src="images/gd_logo.webp" alt="Lumina Adventures logo" loading="lazy"></div>
+          <p class="card-note">Designing a complete Lumina Adventures shield logo in Illustrator, built from layered mountains, sun, forest and compass artwork.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-line"></div>
+      <p>&copy; <span id="footerYear">2026</span> Maina James Kuria &mdash; Built different.</p>
+    </div>
+  </footer>
+
+  <button class="fab" id="topFab" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+    </button>
+    <div class="lightbox-content">
+      <img src="" alt="" id="lightboxImg">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
