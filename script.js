@@ -90,7 +90,7 @@
       tags:["Hardware","Networking"], stack:["Desktop Hardware","LAN Tools"],
       sections:[
         {label:"TEARDOWN_AND_CLEAN", text:"A full teardown and clean of a desktop tower — pulling the PSU, RAM and drives to clear out built-up dust, then reseating every power and data connection on the way back together.", shot:true, image:"images/1/coa_hands_on.webp"},
-        {label:"CPU_REPASTE", text:"Removing the CPU cooler to strip off the old, dried thermal paste and reapply a fresh layer before reseating the heatsink — the part of the teardown that actually affects thermals, not just dust.", shot:true, image:""},
+        {label:"CPU_REPASTE", text:"Removing the CPU cooler to strip off the old, dried thermal paste and reapply a fresh layer before reseating the heatsink — the part of the teardown that actually affects thermals, not just dust.", shot:true, image:"images/1/paste.webp"},
         {label:"HARDWARE_TOOLKIT", text:"A complete hardware and networking toolkit — LAN cable tester, crimping and punch-down tools, soldering iron and screwdrivers — kept on hand for cable termination, network testing, and case- or board-level repair work.", shot:true, image:"images/1/coa_toolbox.webp"}
       ] },
     { glyph:"02", tag:"OS", title:"Operating Systems", sub:"A clean Windows 10 install on lab machines, then managing disks, partitions and live performance inside Windows 11.",
