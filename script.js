@@ -80,8 +80,8 @@
 
      HOW MANY PROJECTS CAN I HAVE?
      Any number — add or delete entries freely. The file counter in
-     the footer and the boot-log line update automatically from
-     CASES.length; you don't need to touch those anywhere.
+     the footer updates automatically from CASES.length; you don't
+     need to touch that anywhere.
      ================================================================ */
   const CASES = [
     { glyph:"01", tag:"Hardware", title:"Computer Organization & Architecture", sub:"Full teardown, clean and CPU repaste on a desktop tower, plus the hardware/networking toolkit that goes with it.",
@@ -243,102 +243,35 @@
 
   /* =========================================================
      BOOT SEQUENCE
+     A short, simple reveal: the monogram fades/scales in over a
+     thin filling underline, then the whole overlay fades out.
+     Click anywhere on it, press Esc/Enter/Space, or just wait.
      ========================================================= */
   (function boot(){
-    const el      = $('boot');
-    const pctEl   = $('boot-pct');
-    const logEl   = $('boot-log');
-    const waveEl  = $('wave-path');
-    const skipBtn = $('boot-skip');
-
-    // ✏️ EDIT ME — the lines that type out bottom-left during boot.
-    // Each row is [text, isOK]. isOK:1 renders the line in green
-    // (use it for "success" lines); isOK:0 renders in muted grey.
-    // They appear one after another automatically — no need to
-    // change the timing math below, just add/remove/reword rows.
-    const LOG = [
-      ['> INIT_ARCHIVE', 0],
-      ['> DECRYPT_KEY :: OK', 1],
-      ['> INDEXING_FILES … ' + String(CASES.length).padStart(2,'0'), 0],
-      ['> BIOMETRICS :: MATCHED', 1],
-      ['> ESTABLISHING_SECURE_LINK', 0]
-    ];
-    LOG.forEach((row, i) => {
-      const d = document.createElement('div');
-      d.textContent = row[0];
-      if(row[1]) d.className = 'ok';
-      d.style.animationDelay = (0.35 + i * 0.34) + 's';
-      logEl.appendChild(d);
-    });
+    const el = $('boot');
 
     let finished = false;
-    let raf = 0;
     // ✏️ EDIT ME — how long the boot animation runs, in milliseconds.
-    // 2400 = 2.4 seconds. Visitors can always skip it early (SKIP
-    // button, Esc, Enter, or Space), so it's safe to make this a
-    // little longer if you want the effect to breathe.
-    const DURATION = 2400;
-    const start = performance.now();
-
-    // original waveform: layered sine noise, amplitude rises with progress
-    const POINTS = 160;
-    function drawWave(t, amp){
-      let out = '';
-      for(let i = 0; i <= POINTS; i++){
-        const x = (i / POINTS) * 1000;
-        const env = Math.sin((i / POINTS) * Math.PI);          // taper at both ends
-        const n =
-          Math.sin(i * 0.42 + t * 3.1) * 0.6 +
-          Math.sin(i * 1.17 - t * 4.7) * 0.28 +
-          Math.sin(i * 2.63 + t * 1.9) * 0.12;
-        const spike = (i % 37 === 0) ? Math.sin(t * 9) * 0.5 : 0;
-        const y = 90 - (n + spike) * amp * env;
-        out += x.toFixed(1) + ',' + y.toFixed(1) + ' ';
-      }
-      waveEl.setAttribute('points', out.trim());
-    }
-
-    function setPct(v){
-      // Zero-padded to a fixed 3 digits ("007%" … "100%") so the string
-      // is always the same length — otherwise the display font's digits
-      // aren't perfectly uniform-width and the number visibly jitters/
-      // resizes as it counts up.
-      const digits = String(Math.round(v)).padStart(3, '0');
-      pctEl.innerHTML = digits + '<span class="sign">%</span>';
-    }
-
-    function tick(now){
-      const elapsed = now - start;
-      const p = Math.min(elapsed / DURATION, 1);
-      const eased = 1 - Math.pow(1 - p, 2.2);                   // decelerating climb
-      const jitter = p < 1 ? (Math.random() * 1.6 - 0.8) : 0;   // reads like a live signal
-      setPct(Math.min(100, Math.max(0, eased * 100 + jitter)));
-      drawWave(elapsed / 1000, 8 + eased * 46);
-      if(p < 1){ raf = requestAnimationFrame(tick); }
-      else { setPct(100); setTimeout(finish, 150); }
-    }
+    const DURATION = 1450;
 
     function finish(){
       if(finished) return;
       finished = true;
-      if(raf) cancelAnimationFrame(raf);
       document.removeEventListener('keydown', onKey);
-      setPct(100);
+      el.removeEventListener('click', finish);
       el.classList.add('done');
       document.body.classList.remove('booting');
       document.body.classList.add('booted');
       state.booted = true;
-      setTimeout(() => { el.remove(); }, state.reduced ? 20 : 800);
+      setTimeout(() => { el.remove(); }, state.reduced ? 20 : 650);
     }
 
     function onKey(e){ if(e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') finish(); }
-    skipBtn.addEventListener('click', finish);
     document.addEventListener('keydown', onKey);
+    el.addEventListener('click', finish);
 
-    if(state.reduced){ setPct(100); finish(); return; }
-    drawWave(0, 8);
-    raf = requestAnimationFrame(tick);
-    setTimeout(finish, DURATION + 2500);                        // hard safety net
+    if(state.reduced){ finish(); return; }
+    setTimeout(finish, DURATION);
   })();
 
   /* =========================================================
@@ -348,7 +281,6 @@
     const hero   = $('hero');
     const center = $('hero-center');
     const wrapEl = $('name-wrap');
-    const line   = $('mouse-line');
     const dot    = $('mouse-dot');
     const coord  = $('mouse-coord');
     if(!window.matchMedia('(pointer: fine)').matches) return;
@@ -357,7 +289,6 @@
     function render(){
       m.raf = 0;
       if(state.reduced) return;
-      line.style.transform  = 'translateY(' + m.y + 'px)';
       dot.style.transform   = 'translate(' + m.x + 'px,' + m.y + 'px) translate(-50%,-50%)';
       coord.style.transform = 'translate(' + m.x + 'px,' + m.y + 'px) translate(10px,-50%)';
       coord.textContent = 'X: ' + Math.round(m.x) + ' Y: ' + Math.round(m.y);
@@ -398,11 +329,11 @@
     track.innerHTML = '';
     CASES.forEach((c, i) => {
       const card = document.createElement('article');
-      card.className = 'evidence-card';
+      card.className = 'unit-card';
       card.tabIndex = 0;
       card.dataset.index = i;
       card.setAttribute('role','button');
-      card.setAttribute('aria-label', 'Decrypt file: ' + c.title);
+      card.setAttribute('aria-label', 'Open file: ' + c.title);
       card.style.setProperty('--pc1', c.pc1);
       card.style.setProperty('--pc2', c.pc2);
       card.innerHTML =
@@ -414,10 +345,10 @@
         '<span class="card-corner bl"></span><span class="card-corner br"></span>' +
         '<div class="card-scrim"></div>' +
         '<div class="card-body">' +
-          '<div class="card-num">EVIDENCE #' + esc(c.glyph) + '</div>' +
+          '<div class="card-num">UNIT #' + esc(c.glyph) + '</div>' +
           '<div class="card-title">' + esc(c.title) + '</div>' +
           '<div class="card-rule"></div>' +
-          '<div class="card-cta">[ CLICK TO DECRYPT ]</div>' +
+          '<div class="card-cta">[ CLICK TO OPEN ]</div>' +
         '</div>';
       applyImage(card.querySelector('.card-photo'), c.image);
       card.addEventListener('click', () => openFile(i, card));
@@ -437,7 +368,7 @@
       row.tabIndex = 0;
       row.dataset.index = i;
       row.setAttribute('role','button');
-      row.setAttribute('aria-label', 'Decrypt file: ' + c.title);
+      row.setAttribute('aria-label', 'Open file: ' + c.title);
       row.style.setProperty('--pc1', c.pc1);
       row.style.setProperty('--pc2', c.pc2);
       row.innerHTML =
@@ -445,12 +376,12 @@
         '<span class="list-scrim"></span>' +
         '<span class="list-ticks"></span>' +
         '<span class="list-main">' +
-          '<span class="list-num">EVIDENCE #' + esc(c.glyph) + '</span>' +
+          '<span class="list-num">UNIT #' + esc(c.glyph) + '</span>' +
           '<span class="list-title">' + esc(c.title) + '</span>' +
         '</span>' +
         '<span class="list-meta">' +
           '<span class="list-tag">' + esc(c.tag.toUpperCase()) + '</span>' +
-          '<span class="list-cta">[ CLICK TO DECRYPT ]</span>' +
+          '<span class="list-cta">[ CLICK TO OPEN ]</span>' +
           '<span class="list-arrow"></span>' +
         '</span>';
       applyImage(row.querySelector('.list-bg'), c.image);
@@ -513,7 +444,7 @@
   /* ============ fill dossier ============ */
   let outlineObserver = null;
   function fillDossier(c){
-    $('d-filenum').textContent  = 'EVIDENCE #' + c.glyph;
+    $('d-filenum').textContent  = 'UNIT #' + c.glyph;
     $('d-category').textContent = c.tag.toUpperCase();
     $('d-title').textContent    = c.title;
     $('d-sub').textContent      = c.sub;
@@ -536,6 +467,7 @@
     dHero.style.setProperty('--pc2', c.pc2);
     dHero.innerHTML = coverIcon(c.tag);
     applyImage(dHero, c.image);
+    if(c.image) dHero.dataset.src = c.image; else delete dHero.dataset.src;
 
     $('d-content').innerHTML = c.sections.map((s, i) => {
       const head = '<div class="d-section-label">&gt;&gt; ' + esc(s.label) + '</div>' +
@@ -544,10 +476,11 @@
         const style = s.image
           ? '--img:' + cssUrl(s.image)
           : '--sc1:' + esc(s.sc1 || c.pc1) + ';--sc2:' + esc(s.sc2 || c.pc2);
-        return '<div class="shot' + (s.image ? ' has-img' : '') + '" style=\'' + style + '\'>' +
+        const dataSrc = s.image ? ' data-src="' + esc(s.image) + '"' : '';
+        return '<div class="shot' + (s.image ? ' has-img' : '') + '" style=\'' + style + '\'' + dataSrc + '>' +
           '<span class="shot-glyph">' + esc(c.glyph) + '</span>' +
           '<span class="shot-corner tl"></span><span class="shot-corner br"></span>' +
-          '<span class="shot-tag">EXAMINE_IMG</span>' +
+          '<span class="shot-tag">' + (s.image ? 'CLICK TO ZOOM' : 'EXAMINE_IMG') + '</span>' +
         '</div>';
       })();
       return '<div class="d-section" id="d-sec-' + i + '" data-index="' + i + '">' + head + shot + '</div>';
@@ -726,6 +659,7 @@
   }
 
   function onKeydown(e){
+    if(state.lightboxOpen) return; // let the lightbox handle its own keys first
     if(e.key === 'Escape'){ e.preventDefault(); closeFile(); }
     else if(e.key === 'ArrowRight') step(1);
     else if(e.key === 'ArrowLeft')  step(-1);
@@ -759,4 +693,128 @@
       dossier.classList.remove('no-anim');
     });
   });
+
+  /* =========================================================
+     LIGHTBOX — click any dossier picture to pop it out full-
+     screen and zoom with the wheel / pinch / +/- buttons,
+     dragging to pan once zoomed past 100%.
+     ========================================================= */
+  (function lightbox(){
+    const lb       = $('lightbox');
+    const stage    = $('lb-stage');
+    const img      = $('lb-img');
+    const zoomLbl  = $('lb-zoom-level');
+    const zoomIn   = $('lb-zoom-in');
+    const zoomOut  = $('lb-zoom-out');
+    const zoomRst  = $('lb-zoom-reset');
+    const lbClose  = $('lb-close');
+    const dContent = $('d-content');
+
+    const MIN = 1, MAX = 6, STEP = .35;
+    const z = { scale:1, x:0, y:0 };
+    let lbOpen = false;
+    let dragging = false, dragStartX = 0, dragStartY = 0, startX = 0, startY = 0;
+    let lastOpener = null;
+
+    function clampPan(){
+      const rect = stage.getBoundingClientRect();
+      const iw = img.offsetWidth * z.scale, ih = img.offsetHeight * z.scale;
+      const maxX = Math.max(0, (iw - rect.width) / 2);
+      const maxY = Math.max(0, (ih - rect.height) / 2);
+      z.x = Math.min(maxX, Math.max(-maxX, z.x));
+      z.y = Math.min(maxY, Math.max(-maxY, z.y));
+    }
+    function render(useTransition){
+      img.style.transition = useTransition === false ? 'none' : '';
+      img.style.transform = 'translate(' + z.x + 'px,' + z.y + 'px) scale(' + z.scale + ')';
+      zoomLbl.textContent = Math.round(z.scale * 100) + '%';
+      lb.classList.toggle('zoomed', z.scale > 1);
+    }
+    function setScale(next, useTransition){
+      z.scale = Math.min(MAX, Math.max(MIN, next));
+      if(z.scale === MIN){ z.x = 0; z.y = 0; }
+      clampPan();
+      render(useTransition);
+    }
+
+    function openLightbox(src, alt, opener){
+      if(!src) return;
+      lastOpener = opener || null;
+      img.src = src;
+      img.alt = alt || '';
+      z.scale = 1; z.x = 0; z.y = 0;
+      render(false);
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      lbOpen = true;
+      state.lightboxOpen = true;
+      document.addEventListener('keydown', onLbKeydown);
+      lbClose.focus();
+    }
+    function closeLightbox(){
+      lb.classList.remove('open', 'zoomed', 'panning');
+      lb.setAttribute('aria-hidden', 'true');
+      lbOpen = false;
+      state.lightboxOpen = false;
+      document.removeEventListener('keydown', onLbKeydown);
+      setTimeout(() => { if(!lbOpen) img.src = ''; }, 250);
+      if(lastOpener && lastOpener.isConnected) lastOpener.focus({preventScroll:true});
+    }
+    function onLbKeydown(e){
+      if(e.key === 'Escape'){ e.preventDefault(); e.stopPropagation(); closeLightbox(); }
+      else if(e.key === '+' || e.key === '=') setScale(z.scale + STEP);
+      else if(e.key === '-' || e.key === '_') setScale(z.scale - STEP);
+      else if(e.key === '0') setScale(1);
+    }
+
+    // open from any "shot" picture inside the dossier body
+    dContent.addEventListener('click', e => {
+      const shot = e.target.closest('.shot.has-img');
+      if(!shot || !shot.dataset.src) return;
+      openLightbox(shot.dataset.src, 'Enlarged screenshot', shot);
+    });
+    // open from the big hero image at the top of the dossier
+    dHero.addEventListener('click', () => {
+      if(dHero.dataset.src) openLightbox(dHero.dataset.src, 'Enlarged cover image', dHero);
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', e => { if(e.target === lb || e.target === stage) closeLightbox(); });
+    zoomIn.addEventListener('click', () => setScale(z.scale + STEP));
+    zoomOut.addEventListener('click', () => setScale(z.scale - STEP));
+    zoomRst.addEventListener('click', () => setScale(1));
+
+    // wheel to zoom, centred roughly on the cursor
+    stage.addEventListener('wheel', e => {
+      if(!lbOpen) return;
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -STEP : STEP;
+      setScale(z.scale + delta);
+    }, { passive:false });
+
+    // double-click / double-tap toggles between 1x and 2.5x
+    img.addEventListener('dblclick', () => setScale(z.scale > 1 ? 1 : 2.5));
+
+    // drag to pan once zoomed in
+    stage.addEventListener('pointerdown', e => {
+      if(z.scale <= 1) return;
+      dragging = true;
+      dragStartX = e.clientX; dragStartY = e.clientY;
+      startX = z.x; startY = z.y;
+      lb.classList.add('panning');
+      stage.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener('pointermove', e => {
+      if(!dragging) return;
+      z.x = startX + (e.clientX - dragStartX);
+      z.y = startY + (e.clientY - dragStartY);
+      clampPan();
+      render(false);
+    });
+    function endDrag(){ dragging = false; lb.classList.remove('panning'); }
+    stage.addEventListener('pointerup', endDrag);
+    stage.addEventListener('pointercancel', endDrag);
+
+    window.addEventListener('resize', () => { if(lbOpen) clampPan(); render(false); });
+  })();
 })();
