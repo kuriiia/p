@@ -315,7 +315,6 @@
   const backdrop = $('backdrop');
   const dossier  = $('dossier');
   const dScroll  = $('d-scroll');
-  const dHero    = $('d-hero');
   const glitch   = $('glitch');
   const closeBtn = $('close-btn');
   const prevBtn  = $('d-prev');
@@ -462,12 +461,6 @@
       accessBtn.setAttribute('aria-disabled','true');
       accessBtn.textContent = 'NO PUBLIC URL';
     }
-
-    dHero.style.setProperty('--pc1', c.pc1);
-    dHero.style.setProperty('--pc2', c.pc2);
-    dHero.innerHTML = coverIcon(c.tag);
-    applyImage(dHero, c.image);
-    if(c.image) dHero.dataset.src = c.image; else delete dHero.dataset.src;
 
     $('d-content').innerHTML = c.sections.map((s, i) => {
       const head = '<div class="d-section-label">&gt;&gt; ' + esc(s.label) + '</div>' +
@@ -772,10 +765,6 @@
       const shot = e.target.closest('.shot.has-img');
       if(!shot || !shot.dataset.src) return;
       openLightbox(shot.dataset.src, 'Enlarged screenshot', shot);
-    });
-    // open from the big hero image at the top of the dossier
-    dHero.addEventListener('click', () => {
-      if(dHero.dataset.src) openLightbox(dHero.dataset.src, 'Enlarged cover image', dHero);
     });
 
     lbClose.addEventListener('click', closeLightbox);
